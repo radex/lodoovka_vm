@@ -1,0 +1,92 @@
+SYNTAX
+
+registers: A, B, C, ..., Z
+dec numbers: `0`, `1`, `2`
+hex numbers: `0x00`, `0xFF`
+bin numbers: `0b0101`
+
+label definition: `symbol:`
+label use: `symbol`
+
+address alias, other names: `symbol`
+
+command invocation:
+`foo`
+`foo arg arg`
+`foo input input -> output`
+
+comments:
+`code ; comment`
+
+data section:
+`DATA`
+
+data section number:
+`label: D8 255` (also D16 D32)
+
+data section string:
+`label: DS "foo"`
+
+------
+MEMORY
+
+22-bit memory.
+
+user memory (1MB):
+0x000000 -- 0x0FFFFF
+
+screen buffer (1.44MB):
+0x100000 -- 0x2FFFFF
+
+load (address/alias) -> rx
+store rx -> (address/alias)
+
+let (constantvalue) -> rx
+
+----------
+ARITHMETIC
+
+add sub
+mul div mod
+
+fadd fsub
+fmul fdiv fmod
+
+------------
+BINARY LOGIC
+
+and or not xor
+shl shr
+
+------------------
+COMPARE AND BRANCH
+
+cmp rx rx
+jeq label
+jne
+jgt jge
+jlt jle
+jump
+
+-------
+CALLING
+
+each function has its own registers
+arguments and return values are passed with stack
+
+function:
+call function
+ret
+
+-----
+STACK
+
+push pop
+
+----------
+INTERRUPTS
+
+interrupts have calling convention like functions
+
+int (name)
+setint (name) (label)
