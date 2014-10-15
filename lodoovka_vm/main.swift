@@ -149,11 +149,11 @@ class Lexer {
 
 let lexer = Lexer(string:
     "main:\n" +
-    "load 0xFFAA -> A ; some memory loading\n" +
-    "add A 10 -> A\n" +
-    "or A 0b001101 -> B\n" +
-    "\n" +
-    "DATA\n" +
+        "load 0xFFAA -> A ; some memory loading\n" +
+        "add A 10 -> A\n" +
+        "or A 0b001101 -> B\n" +
+        "\n" +
+        "DATA\n" +
     "test_string: DS \"Some string 0 0xFF 0b11\""
 )
 
@@ -189,16 +189,15 @@ lexer.registerState("root", [
     }),
     // other word symbols
     rule("[a-zA-Z_]+", { .Symbol($0) })
-])
+    ])
 
 lexer.registerState("string", [
     rule("[^\\\"]+", { .String($0) }),
     rule("\"", .Pop, { _ in nil })
-])
+    ])
 
 lexer.lex()
 
 for token in lexer.tokens {
     println(token.description)
 }
-lexer.stream.position
