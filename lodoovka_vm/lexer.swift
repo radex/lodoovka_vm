@@ -7,6 +7,11 @@ struct Stream {
     var matchingRange: NSRange {
         return NSRange(location: position, length: string.length - position)
     }
+    
+    var snippet: NSString {
+        let length = min(string.length - position, 20)
+        return string.substringWithRange(NSRange(location: position, length: length))
+    }
 }
 
 func matchRegexAt(#pattern: String, stream: Stream) -> String? {
@@ -49,15 +54,17 @@ enum Token: Printable {
     case Arrow
     case Label(Swift.String)
     case Symbol(Swift.String)
+    case Macro(Swift.String)
     case String(Swift.String)
     case Number(Int)
     
     var description: Swift.String {
         switch self {
-        case .Newline: return "\\n"
-        case .Arrow: return "->"
+        case .Newline: return "NEWLINE"
+        case .Arrow: return "ARROW"
         case .Label(let string): return "LABEL \(string):"
         case .Symbol(let string): return "SYMBOL \(string)"
+        case .Macro(let string): return "MACRO \(string)"
         case .String(let string): return "STRING \"\(string)\""
         case .Number(let number): return "NUMBER \(number)"
         }
@@ -101,7 +108,7 @@ class Lexer {
                 default: return nextState
                 }
             } else {
-                fatalError("No rule matched :(")
+                fatalError("No rule matched for stream:\"\(stream.snippet)\"…")
             }
         }
         

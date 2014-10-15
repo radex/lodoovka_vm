@@ -1,21 +1,15 @@
 import Foundation
 
-let lexer = Lexer(string:
-    "main:\n" +
-        "load 0xFFAA -> A ; some memory loading\n" +
-        "add A 10 -> A\n" +
-        "or A 0b001101 -> B\n" +
-        "\n" +
-        "DATA\n" +
-    "test_string: DS \"Some string 0 0xFF 0b11\""
-)
+let asm = NSString(contentsOfFile: "test.txt", encoding: NSUTF8StringEncoding, error: nil)!
+
+let lexer = Lexer(string: asm)
 
 lexer.registerState("root", [
     // whitespace
     rule("\\n", { _ in .Newline }),
     rule("[^\\S\\n]+", { _ in nil }),
     // comment
-    rule(";.*?\n", { _ in .Newline }),
+    rule(";.*?(?=\\n|\\z)", { _ in nil }),
     // hex numbers
     rule("0x[0-9a-fA-F]+", {
         var number: UInt32 = 0
@@ -39,6 +33,12 @@ lexer.registerState("root", [
         let string = $0 as NSString
         let label = string.substringToIndex(string.length - 1)
         return .Label(label)
+    }),
+    // macros
+    rule("@[a-zA-Z_]+", {
+        let string = $0 as NSString
+        let name = string.substringFromIndex(1)
+        return .Macro(name)
     }),
     // other word symbols
     rule("[a-zA-Z_]+", { .Symbol($0) })

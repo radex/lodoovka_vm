@@ -1,0 +1,8 @@
+main:
+    load 0xFFAA -> A ; some memory loading
+    add A 10 -> A
+    or A 0b01011 -> B
+
+@DATA
+
+test_string: DS "Some string 0xFF 0 0b123"
