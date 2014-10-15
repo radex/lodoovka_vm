@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E6594B019EEEB79001ACB94 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6594AF19EEEB79001ACB94 /* main.swift */; };
+		6E6594B819EEF124001ACB94 /* stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6594B719EEF124001ACB94 /* stack.swift */; };
+		6E6594BA19EEF14F001ACB94 /* lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6594B919EEF14F001ACB94 /* lexer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		6E6594AC19EEEB79001ACB94 /* lodoovka_vm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lodoovka_vm; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6594AF19EEEB79001ACB94 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E6594B719EEF124001ACB94 /* stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stack.swift; sourceTree = "<group>"; };
+		6E6594B919EEF14F001ACB94 /* lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lexer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +61,19 @@
 		6E6594AE19EEEB79001ACB94 /* lodoovka_vm */ = {
 			isa = PBXGroup;
 			children = (
+				6E6594B619EEF11A001ACB94 /* stdext */,
 				6E6594AF19EEEB79001ACB94 /* main.swift */,
+				6E6594B919EEF14F001ACB94 /* lexer.swift */,
 			);
 			path = lodoovka_vm;
+			sourceTree = "<group>";
+		};
+		6E6594B619EEF11A001ACB94 /* stdext */ = {
+			isa = PBXGroup;
+			children = (
+				6E6594B719EEF124001ACB94 /* stack.swift */,
+			);
+			name = stdext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +132,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E6594B819EEF124001ACB94 /* stack.swift in Sources */,
+				6E6594BA19EEF14F001ACB94 /* lexer.swift in Sources */,
 				6E6594B019EEEB79001ACB94 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +249,7 @@
 				6E6594B519EEEB79001ACB94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
